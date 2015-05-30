@@ -40,6 +40,7 @@ import org.quantumbadger.redreader.account.RedditAccountChangeListener;
 import org.quantumbadger.redreader.account.RedditAccountManager;
 import org.quantumbadger.redreader.adapters.MainMenuSelectionListener;
 import org.quantumbadger.redreader.cache.CacheManager;
+import org.quantumbadger.redreader.common.Alarms;
 import org.quantumbadger.redreader.common.General;
 import org.quantumbadger.redreader.common.LinkHandler;
 import org.quantumbadger.redreader.common.PrefsUtility;
@@ -466,6 +467,13 @@ public class MainActivity extends RefreshableActivity
 		} else if(PrefsUtility.isRefreshRequired(this, key)) {
 			requestRefresh(RefreshableFragment.ALL, false);
 		}
+
+		if (key.equals(getString(R.string.pref_behaviour_skiptofrontpage_key)))
+			if (!PrefsUtility.pref_behaviour_notifications(this, prefs)) {
+				Alarms.stopAlarm(Alarms.Alarm.MESSAGE_CHECKER);
+			} else {
+				Alarms.startAlarm(Alarms.Alarm.MESSAGE_CHECKER, this);
+			}
 	}
 
 	@Override

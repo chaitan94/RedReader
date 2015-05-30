@@ -20,12 +20,18 @@ package org.quantumbadger.redreader.receivers;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+
+import org.holoeverywhere.preference.PreferenceManager;
+import org.holoeverywhere.preference.SharedPreferences;
 import org.quantumbadger.redreader.common.Alarms;
+import org.quantumbadger.redreader.common.PrefsUtility;
 
 public class BootReceiver extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-        Alarms.onBoot(context);
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+		if (PrefsUtility.pref_behaviour_notifications(context, prefs))
+			Alarms.onBoot(context);
     }
 }

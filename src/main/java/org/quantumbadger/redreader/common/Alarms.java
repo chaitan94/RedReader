@@ -88,6 +88,7 @@ public class Alarms {
 
 	/**
 	 * Starts all alarms that are supposed to start at device boot
+	 * Is run only when Notifications are enabled by the user
 	 * @param context
 	 */
 

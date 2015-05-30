@@ -21,6 +21,7 @@ import android.os.Environment;
 import android.util.Log;
 import org.holoeverywhere.app.Application;
 import org.holoeverywhere.preference.PreferenceManager;
+import org.holoeverywhere.preference.SharedPreferences;
 import org.quantumbadger.redreader.cache.CacheManager;
 import org.quantumbadger.redreader.common.Alarms;
 import org.quantumbadger.redreader.common.PrefsUtility;
@@ -85,7 +86,9 @@ public class RedReader extends Application {
 			}
 		}.start();
 
-        Alarms.onBoot(this);
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		if (PrefsUtility.pref_behaviour_notifications(this, prefs))
+			Alarms.onBoot(this);
 
 		NewMessageChecker.checkForNewMessages(this);
     }

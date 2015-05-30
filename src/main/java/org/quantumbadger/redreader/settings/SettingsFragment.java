@@ -107,4 +107,6 @@ public final class SettingsFragment extends PreferenceFragment {
 			});
 		}
 	}
+
+
 }
